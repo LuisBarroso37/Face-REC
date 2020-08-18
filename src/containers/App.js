@@ -97,7 +97,7 @@ class App extends Component {
       imageUrl: this.state.input
     });
 
-    fetch('http://localhost:4000/imageUrl', {
+    fetch('https://stark-basin-51152.herokuapp.com/imageUrl', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -107,7 +107,7 @@ class App extends Component {
     .then(res => res.json())
     .then(res => {
       if (res) {
-        fetch('http://localhost:4000/image', {
+        fetch('https://stark-basin-51152.herokuapp.com/image', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
