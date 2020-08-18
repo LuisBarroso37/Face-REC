@@ -1,0 +1,137 @@
+article {
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
+    color: #333;
+    max-width: 32rem;
+    width: 100%;
+    margin: 2rem auto;
+}
+
+@media screen and (min-width: 30em) and (max-width: 60em) {
+    article {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    article {
+        width: 25%;
+    }
+}
+
+.sign-in-container {
+    color: rgba(0, 0, 0, .8);
+    padding: 2rem;
+}
+
+.sign-in-form {
+    max-width: 30em;
+}
+
+.sign-in-fields {
+    border: 1px solid transparent;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.sign-in-title {
+    font-size: 3rem;
+    font-weight: 600;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.email-field, .name-field {
+    margin-top: 1rem;
+}
+
+.input-field {
+    border: 1px solid #000;
+    background-color: transparent;
+    width: 100%;
+}
+
+.input-field::-moz-focus-inner,
+.sign-in-button::-moz-focus-inner  {
+    border: 0;
+    padding: 0;
+}
+
+.input-field:focus, .input-field:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.field-label {
+    display: block;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: .875rem;
+}
+
+.password-field {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sign-in-button {
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: 1px solid #000;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: .875rem;
+}
+
+.sign-in-button:hover, 
+.sign-in-button:focus {
+    transform: scale(1.05);
+    transition: transform .25s ease-out;
+}
+
+.sign-in-button:active {
+    transform: scale(.9);
+    transition: transform .25s ease-out;
+}
+
+.register-button {
+    display: block;
+    color: #000;
+    font-size: .875rem;
+    text-decoration: none;
+    transition: color .15s ease-in;
+    cursor: pointer;
+}
+
+.register-button:link, 
+.register-button:visited,
+.register-button:hover,
+.register-button:active {
+    transition: color .15s ease-in;
+}
+
+.dim {
+    opacity: 1;
+    transition: opacity .15s ease-in;
+}
+
+.dim:hover, .dim:focus {
+    opacity: .5;
+    transition: opacity .15s ease-in;
+}
+
+.dim:active {
+    opacity: .8;
+    transition: opacity .15s ease-out;
+}
+
+.register-container {
+    line-height: 1.5;
+    margin-top: 1rem;
+}

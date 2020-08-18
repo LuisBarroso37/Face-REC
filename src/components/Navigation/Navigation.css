@@ -1,0 +1,19 @@
+nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navigation {
+    color: black;
+    font-size: 1.5rem;
+    padding: 3px;
+    cursor: pointer;
+    text-decoration: underline;
+    opacity: 1;
+    transition: opacity .15s ease-in;
+}
+
+.navigation:hover, .navigation:focus {
+    opacity: .5;
+    transition: opacity .15s ease-in;
+  }
