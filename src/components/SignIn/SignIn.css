@@ -1,4 +1,4 @@
-article {
+.sign-in-article {
     border-radius: 0.5rem;
     border: 1px solid rgba(0, 0, 0, .1);
     box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
@@ -87,6 +87,8 @@ article {
     background-color: transparent;
     cursor: pointer;
     font-size: .875rem;
+    transform: translateZ(0);
+    transition: transform 0.25s ease-out;
 }
 
 .sign-in-button:hover, 

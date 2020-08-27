@@ -22,6 +22,10 @@ class SignIn extends Component {
         })
     }
 
+    saveAuthToken = (token) => {
+        window.sessionStorage.setItem('token', token);
+    }
+
     onSubmitSignIn = (event) => {
         fetch('http://localhost:3000/signin', {
             method: 'post',
@@ -32,10 +36,25 @@ class SignIn extends Component {
             })
         })
         .then(res => res.json())
-        .then(user => {
-            if (user.id) {
-                this.props.loadUser(user);
-                this.props.onRouteChange('home');
+        .then(data => {
+            if (data.id && data.success === 'true') {
+                this.saveAuthToken(data.token);
+
+                fetch(`http://localhost:3000/profile/${data.id}`, {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': data.token
+                    }
+                })
+                .then(res => res.json())
+                .then(user => {
+                    if (user && user.email) {
+                        this.props.loadUser(user);
+                        this.props.onRouteChange('home');
+                    }
+                })
+                .catch(console.log);
             }
         });
     }
@@ -43,7 +62,7 @@ class SignIn extends Component {
     render() {
         const { onRouteChange } = this.props;
         return (
-            <article>
+            <article className='sign-in-article'>
                 <main className='sign-in-container center'>
                     <div className='sign-in-form'>
                         <fieldset className='sign-in-fields'>

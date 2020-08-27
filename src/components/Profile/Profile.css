@@ -1,0 +1,101 @@
+.profile-modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.profile-article {
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
+    color: #333;
+    margin: 1rem auto;
+    max-width: 32rem;
+    width: 100%;
+    display: flex;
+    background-color: #FFFFFF;
+}
+
+@media screen and (min-width: 30em) and (max-width: 60em) {
+    article {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    article {
+        width: 25%;
+    }
+}
+
+.profile-container {
+    color: rgba(0, 0, 0, .8);
+    padding: 2rem 0.5rem 2rem 2rem;
+    width: 100%;
+}
+
+.profile-image {
+    display: block;
+    margin: auto;
+    width: 4rem;
+    height: 4rem;
+}
+
+.input-label {
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.input-field {
+    padding: 0.1rem 0.5rem;
+    border: 1px solid #000;
+}
+
+.save-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.profile-button {
+    width: 40%;
+    padding: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #96CCFF;
+    border-color: rgba(0, 0, 0, .2);
+    transform: translateZ(0);
+    transition: transform 0.25s ease-out;
+}
+
+.cancel {
+    background-color: #FF725C;
+}
+
+.profile-button:hover, 
+.profile-button:focus {
+    color: #FFFFFF;
+    transform: scale(1.05);
+    transition: transform .25s ease-out;
+}
+
+.profile-button:active {
+    transform: scale(.9);
+    transition: transform .25s ease-out;
+}
+
+.modal-close {
+    font-size: 3rem;
+    font-style: bold;
+    cursor: pointer;
+    position: relative;
+    right: 25px;
+}
+
+.modal-close:hover {
+    color: grey;
+    cursor: pointer;
+}

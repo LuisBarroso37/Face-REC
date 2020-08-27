@@ -1,8 +1,8 @@
 ## Face REC 
 
-Face recogition web app which allows users to insert images and get a bounding box around the face or faces present the image. 
+Face recognition web app which allows users to upload images and get a bounding box around the face or faces present in the image. 
 
-This is done using the Clarifai API which gives us access to a face detection model. Everytime an user presses the 'Detect' button an entries count is incremented, keeping track of how many images the user has run through the face detction model. Users can register and login to the app and their information is keep in a 
+This is done using the Clarifai API which gives us access to a face detection model. Everytime an user presses the 'Detect' button an entries count is incremented, keeping track of how many images the user has run through the face detection model. Users can register and login to the app and their information is kept in a 
 postgreSQL database.
 
 **The API for this app is in a separate github repo.**
@@ -16,7 +16,7 @@ To run this app in a local environment, in the project directory:
 
 ### Information
 
-This app was created by using React, Node.js, Express.js, Knex.js, PostgreSQL and the Clarifai API.
+This app was created by using React, Node.js, Express.js, Knex.js, PostgreSQL, Redis, JWT and the Clarifai API.
 
 [Clarifai](https://docs.clarifai.com/) - Clarifai offers several different types of machine learning models that can be used for many situations. They have a free plan which allows us to integrate their API on our project, test it and showcase it to other people.
 

@@ -50,7 +50,7 @@ class Register extends Component {
 
     render() {
         return (
-            <article>
+            <article className='sign-in-article'>
                 <main className='sign-in-container center'>
                     <div className='sign-in-form'>
                         <fieldset className='sign-in-fields'>

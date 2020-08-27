@@ -7,6 +7,8 @@ import FaceRecognition from '../components/FaceRecognition/FaceRecognition';
 import SignIn from '../components/SignIn/SignIn';
 import Register from '../components/Register/Register';
 import Particles from 'react-particles-js';
+import Modal from '../components/Modal/Modal';
+import Profile from '../components/Profile/Profile';
 import './App.css';
 
 // Options for the particles background - react-particles-js
@@ -28,31 +30,56 @@ const initialState = {
   boxes: [],
   route: 'signin',
   isSignedIn: false,
+  isProfileOpen: false,
   user: {
     id: '',
     name: '',
     email: '',
     entries: 0,
-    joined: ''
+    joined: '',
+    age: '',
+    pet: ''
   }
 };
 
 class App extends Component {
   constructor() {
     super()
-    this.state = {
-      input: '',
-      imageUrl: '',
-      boxes: [],
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      }
+    this.state = initialState
+  }
+
+  componentDidMount() {
+    const token = window.sessionStorage.getItem('token');
+    
+    if (token) {
+      fetch('http://localhost:3000/signin', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.id) {
+          fetch(`http://localhost:3000/profile/${data.id}`, {
+            method: 'get',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': token
+            }
+          })
+          .then(res => res.json())
+          .then(user => {
+            if (user && user.email) {
+              this.loadUser(user);
+              this.onRouteChange('home');
+            }
+          })
+          .catch(console.log);
+        }
+      })
+      .catch(console.log);
     }
   }
 
@@ -69,7 +96,8 @@ class App extends Component {
   }
 
   calculateFaceLocation = (data) => {
-    const image = document.getElementById('input-image');
+    if (data && data.outputs) {
+      const image = document.getElementById('input-image');
     const width = Number(image.width);
     const height = Number(image.height);
 
@@ -84,10 +112,15 @@ class App extends Component {
     });
     
     return faceBoxes;
+    }
+
+    return;
   }
 
   displayBoundingBox = (boxes) => {
-    this.setState({boxes});
+    if (boxes) {
+      this.setState({boxes});
+    }
   }
 
   onInputChange = (event) => {
@@ -103,7 +136,10 @@ class App extends Component {
 
     fetch('http://localhost:3000/imageUrl', {
       method: 'post',
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': window.sessionStorage.getItem('token')
+      },
       body: JSON.stringify({
         input: this.state.input  
         })
@@ -113,7 +149,10 @@ class App extends Component {
       if (res) {
         fetch('http://localhost:3000/image', {
           method: 'put',
-          headers: {'Content-Type': 'application/json'},
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': window.sessionStorage.getItem('token')
+          },
           body: JSON.stringify({
             id: this.state.user.id  
           })
@@ -134,7 +173,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState(initialState);
+      return this.setState(initialState);
     } else if (route === 'home') {
       this.setState({isSignedIn: true});
     }
@@ -142,12 +181,32 @@ class App extends Component {
     this.setState({route});
   }
 
+  toggleModal = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      isProfileOpen: !prevState.isProfileOpen
+    }));
+  }
+
   render() {
-    const { isSignedIn, imageUrl, route, boxes } = this.state;
+    const { isSignedIn, imageUrl, route, boxes, isProfileOpen, user } = this.state;
     return (
       <div className="App">
         <Particles className='particles' params={particlesOptions} />
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+        <Navigation 
+          isSignedIn={isSignedIn} 
+          onRouteChange={this.onRouteChange} 
+          toggleModal={this.toggleModal}
+        />
+        {isProfileOpen &&
+        <Modal>
+          <Profile 
+            isProfileOpen={isProfileOpen} 
+            toggleModal={this.toggleModal} 
+            user={user}
+            loadUser={this.loadUser}
+          />
+        </Modal>}
         { route === 'home'
         ? <div>
             <Logo />
